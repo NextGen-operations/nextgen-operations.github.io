@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Operations Consulting | Support & Operations Transformation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a1628;
+            --secondary: #1e3a5f;
+            --accent: #00d4ff;
+            --accent-warm: #ff6b35;
+            --text-primary: #f0f4f8;
+            --text-secondary: #b0b8c1;
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --border: #30363d;
+            --success: #3fb950;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #0a1628 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 2rem;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #00a8cc 100%);
+            color: var(--primary);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #00a8cc 100%);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.3) 0%, rgba(10, 22, 40, 0.3) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .expertise-card {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .expertise-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .expertise-card:hover::before {
+            opacity: 1;
+        }
+
+        .expertise-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .expertise-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .expertise-level {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--bg-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(30, 58, 95, 0.2) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .service-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-duration {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(30, 58, 95, 0.3) 100%);
+        }
+
+        /* Ideal Clients Section */
+        .ideal-clients {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.2) 0%, rgba(10, 22, 40, 0.2) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .client-tier {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .client-tier-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .client-tier h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .client-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .client-info h4 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .client-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .client-tier:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            background: var(--bg-dark);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(30, 58, 95, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+
+        .benefit-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(8px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(30, 58, 95, 0.3) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a1628 0%, #161b22 100%);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            .expertise-grid, .services-grid, .clients-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">NextGen Ops</div>
+        <ul class="nav-links">
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#clients">Ideal Clients</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transforming <span class="highlight">Operations with AI</span></h1>
+            <p>Help your support team scale faster, resolve tickets smarter, and build sustainable operations that drive growth</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Schedule Consultation</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise" id="expertise">
+        <h2>Our Expertise</h2>
+        <p class="section-subtitle">13+ years driving operational excellence across support, managed services, and AI implementation</p>
+        <div class="expertise-grid">
+            <div class="expertise-card">
+                <h3>Support Operations</h3>
+                <p>End-to-end support strategy, team structure, escalation frameworks, and KPI optimization for scaling organizations.</p>
+                <div class="expertise-level">PRIMARY EXPERTISE</div>
+            </div>
+            <div class="expertise-card">
+                <h3>Managed Services</h3>
+                <p>Service desk optimization, SLA frameworks, workforce planning, and service portfolio management for MSPs.</p>
+                <div class="expertise-level">SECONDARY EXPERTISE</div>
+            </div>
+            <div class="expertise-card">
+                <h3>AI in Customer Support</h3>
+                <p>AI tool evaluation, chatbot implementation, knowledge AI, agent assist, and automation opportunity mapping.</p>
+                <div class="expertise-level">TERTIARY EXPERTISE</div>
+            </div>
+            <div class="expertise-card">
+                <h3>Operations Leadership</h3>
+                <p>Leadership coaching, team development, strategic planning, and change management for support and operations managers.</p>
+                <div class="expertise-level">FOURTH EXPERTISE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2>Our Services</h2>
+        <p class="section-subtitle">Comprehensive solutions tailored to your operations maturity and growth stage</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <h3>Support Health Check</h3>
+                <div class="service-duration">1 Week Assessment</div>
+                <p>Get a comprehensive understanding of your current support operations, identify gaps, and receive an actionable improvement roadmap.</p>
+                <ul class="service-features">
+                    <li>Current state assessment</li>
+                    <li>Process & KPI review</li>
+                    <li>Tool evaluation</li>
+                    <li>Gap analysis</li>
+                    <li>Improvement roadmap</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <h3>AI Readiness Assessment</h3>
+                <div class="service-duration">1 Week Assessment</div>
+                <p>Discover how AI can transform your support operations. Detailed analysis of automation opportunities and ROI potential.</p>
+                <ul class="service-features">
+                    <li>Ticket analysis</li>
+                    <li>Automation opportunities</li>
+                    <li>AI use case mapping</li>
+                    <li>Cost reduction analysis</li>
+                    <li>ROI estimation</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <h3>Support Operations Setup</h3>
+                <div class="service-duration">4-6 Weeks Project</div>
+                <p>Build a scalable operations foundation from the ground up. Team structure, workflows, KPI dashboards, and more.</p>
+                <ul class="service-features">
+                    <li>Team structure design</li>
+                    <li>Escalation matrix</li>
+                    <li>SLA framework</li>
+                    <li>KPI dashboard</li>
+                    <li>Knowledge base setup</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">04</div>
+                <h3>Support Leadership Advisory</h3>
+                <div class="service-duration">Monthly Retainer</div>
+                <p>Ongoing strategic guidance for support and operations leaders. Weekly calls, KPI reviews, and process recommendations.</p>
+                <ul class="service-features">
+                    <li>Weekly strategy calls</li>
+                    <li>KPI & trend review</li>
+                    <li>Process guidance</li>
+                    <li>Leadership coaching</li>
+                    <li>Priority support</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">05</div>
+                <h3>AI Implementation Advisory</h3>
+                <div class="service-duration">Project-based</div>
+                <p>End-to-end support for AI adoption. Tool selection, workflow design, governance, and success measurement.</p>
+                <ul class="service-features">
+                    <li>Tool evaluation & selection</li>
+                    <li>AI roadmap design</li>
+                    <li>Workflow optimization</li>
+                    <li>Governance framework</li>
+                    <li>Success metrics</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">06</div>
+                <h3>Operations Leadership Coaching</h3>
+                <div class="service-duration">Monthly Engagement</div>
+                <p>Personal coaching for support managers and operations leaders. Develop leadership skills and scale your team effectively.</p>
+                <ul class="service-features">
+                    <li>1-on-1 coaching</li>
+                    <li>Leadership development</li>
+                    <li>Team management</li>
+                    <li>Strategic planning</li>
+                    <li>Performance growth</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ideal Clients Section -->
+    <section class="ideal-clients" id="clients">
+        <h2>Who We Work With</h2>
+        <p class="section-subtitle">We specialize in helping growth-stage companies and MSPs build scalable support operations</p>
+        <div class="clients-grid">
+            <div class="client-tier">
+                <div class="client-tier-badge">Tier 1 - Best Fit</div>
+                <h3>Technology Startups</h3>
+                <div class="client-info">
+                    <h4>Typical Size</h4>
+                    <p>20–300 employees</p>
+                </div>
+                <div class="client-info">
+                    <h4>Common Challenges</h4>
+                    <p>No formal support process, growing ticket volume, poor customer satisfaction, need AI adoption</p>
+                </div>
+            </div>
+
+            <div class="client-tier">
+                <div class="client-tier-badge">Tier 2 - Strong Fit</div>
+                <h3>SaaS Companies</h3>
+                <div class="client-info">
+                    <h4>Verticals</h4>
+                    <p>HR Tech, FinTech, EdTech, Logistics Tech</p>
+                </div>
+                <div class="client-info">
+                    <h4>Key Needs</h4>
+                    <p>Support scaling, global coverage, KPI reporting, escalation management</p>
+                </div>
+            </div>
+
+            <div class="client-tier">
+                <div class="client-tier-badge">Tier 3</div>
+                <h3>E-commerce Businesses</h3>
+                <div class="client-info">
+                    <h4>Support Types</h4>
+                    <p>Customer support, billing support, vendor coordination, complaint handling</p>
+                </div>
+                <div class="client-info">
+                    <h4>Focus Areas</h4>
+                    <p>Support optimization and operational efficiency at scale</p>
+                </div>
+            </div>
+
+            <div class="client-tier">
+                <div class="client-tier-badge">Tier 4</div>
+                <h3>MSPs & IT Service Providers</h3>
+                <div class="client-info">
+                    <h4>Service Focus</h4>
+                    <p>Managed services maturity, SLA frameworks, service desk optimization</p>
+                </div>
+                <div class="client-info">
+                    <h4>Goals</h4>
+                    <p>Workforce planning and improved service delivery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose">
+        <h2>Why Choose NextGen Operations</h2>
+        <p class="section-subtitle">Deep expertise meets proven methodologies</p>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <h4>13+ Years Experience</h4>
+                <p>Proven track record in support operations, customer success, managed services leadership, and AI transformation.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Specialized Focus</h4>
+                <p>We don't do generic consulting. We specialize in support operations—a rare combination of expertise that commands premium rates.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>AI-First Approach</h4>
+                <p>Deep understanding of how to leverage AI to automate, optimize, and scale support operations sustainably.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Practical Implementation</h4>
+                <p>Not just strategy—we guide you through implementation with proven frameworks, tools, and best practices.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Business-Focused Results</h4>
+                <p>Every recommendation connects to your business metrics: CSAT, resolution time, cost per ticket, team satisfaction.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Ongoing Partnership</h4>
+                <p>From assessment through implementation and beyond—advisory retainers keep us invested in your success.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section>
+        <div class="cta-section">
+            <h2>Ready to Transform Your Operations?</h2>
+            <p>Start with a support health check assessment and discover your path to operational excellence</p>
+            <button class="btn-primary">Schedule Consultation Call</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>NextGen Operations Consulting</strong></p>
+        <p>Transforming support operations with AI and best practices</p>
+        <div class="footer-links">
+            <a href="#expertise">Expertise</a>
+            <a href="#services">Services</a>
+            <a href="#clients">Ideal Clients</a>
+            <a href="mailto:contact@nextgenops.com">Email</a>
+            <a href="#">LinkedIn</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-secondary);">© 2024 NextGen Operations Consulting. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const element = document.querySelector(href);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Scroll animation trigger for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .expertise-card, .client-tier, .benefit-item').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Button click handlers
+        document.querySelectorAll('.btn-primary, .cta-button, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                // Replace with your contact form or scheduling link
+                console.log('Button clicked - integrate with your CRM or scheduling tool');
+                alert('Contact form or scheduling integration would go here.\n\nReplace this with:\n- Calendly/Cal.com integration\n- Contact form submission\n- Email link');
+            });
+        });
+    </script>
+</body>
+</html>
