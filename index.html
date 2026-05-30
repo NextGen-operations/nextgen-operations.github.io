@@ -202,6 +202,8 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary:hover {
@@ -219,6 +221,8 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-secondary:hover {
@@ -227,25 +231,13 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Section Styling */
@@ -268,6 +260,92 @@
             color: var(--text-secondary);
             margin-bottom: 3rem;
             max-width: 600px;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(30, 58, 95, 0.2) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .about-main p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-mission-vision {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mission-card, .vision-card {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .mission-card h3, .vision-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .mission-card p, .vision-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .about-expertise-list {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .about-expertise-list h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .expertise-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.88rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .about-tagline {
+            margin-top: 2rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-style: italic;
         }
 
         /* Expertise Section */
@@ -552,7 +630,14 @@
         }
 
         footer p {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact {
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
         }
 
         .footer-links {
@@ -604,10 +689,16 @@
 
             .btn-primary, .btn-secondary {
                 width: 100%;
+                text-align: center;
             }
 
             .expertise-grid, .services-grid, .clients-grid, .benefits-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .cta-button {
@@ -621,12 +712,13 @@
     <nav>
         <div class="logo">NextGen Ops</div>
         <ul class="nav-links">
+            <li><a href="#about">About</a></li>
             <li><a href="#expertise">Expertise</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#clients">Ideal Clients</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <button class="cta-button">Get Started</button>
+        <button class="cta-button" onclick="window.location.href='mailto:nextgenoperations.ai@gmail.com'">Get Started</button>
     </nav>
 
     <!-- Hero Section -->
@@ -635,16 +727,58 @@
             <h1>Transforming <span class="highlight">Operations with AI</span></h1>
             <p>Help your support team scale faster, resolve tickets smarter, and build sustainable operations that drive growth</p>
             <div class="hero-buttons">
-                <button class="btn-primary">Schedule Consultation</button>
-                <button class="btn-secondary">Learn More</button>
+                <a href="mailto:nextgenoperations.ai@gmail.com" class="btn-primary">Schedule Consultation</a>
+                <a href="#expertise" class="btn-secondary">Learn More</a>
             </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>About NextGen Operations</h2>
+        <p class="section-subtitle">Built on real-world expertise. Driven by results.</p>
+
+        <div class="about-content">
+            <div class="about-main">
+                <p>At NextGen Operations, we believe that exceptional customer support and operational excellence are key drivers of business growth. Our mission is to help organizations build scalable support functions, optimize operational processes, and leverage AI to improve efficiency, customer experience, and business outcomes.</p>
+                <p>Founded by an operations leader with more than 2 decades of experience in customer support, managed services, service delivery, and operations management, NextGen Operations brings practical, real-world expertise to every engagement. We understand the challenges businesses face when scaling teams, managing service quality, improving productivity, and adopting new technologies.</p>
+                <p>Our approach combines proven operational best practices with modern AI-driven solutions to help organizations streamline workflows, reduce operational costs, improve response times, and empower teams to focus on high-value work.</p>
+                <p>We work with startups, SaaS companies, e-commerce businesses, managed service providers, and growing organizations looking to strengthen their support operations and prepare for the future of AI-enabled service delivery.</p>
+                <p>Whether you are building a support organization from the ground up, optimizing existing processes, implementing AI solutions, or developing leadership capabilities within your teams, NextGen Operations provides the guidance, strategy, and execution support needed to achieve measurable results.</p>
+            </div>
+
+            <div class="about-mission-vision">
+                <div class="mission-card">
+                    <h3>Our Mission</h3>
+                    <p>To help organizations transform operations through practical strategies, operational excellence, and responsible AI adoption.</p>
+                </div>
+                <div class="vision-card">
+                    <h3>Our Vision</h3>
+                    <p>To become a trusted partner for businesses seeking to build world-class support and operations functions that scale efficiently and deliver exceptional customer experiences.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-expertise-list">
+            <h3>Our Expertise</h3>
+            <div class="expertise-tags">
+                <span class="expertise-tag">Support Operations Strategy</span>
+                <span class="expertise-tag">Managed Services Optimization</span>
+                <span class="expertise-tag">AI for Customer Support</span>
+                <span class="expertise-tag">Service Delivery Excellence</span>
+                <span class="expertise-tag">Operations Leadership Coaching</span>
+                <span class="expertise-tag">Process Improvement & Automation</span>
+                <span class="expertise-tag">KPI and Performance Management</span>
+                <span class="expertise-tag">Team Scaling and Workforce Planning</span>
+            </div>
+            <p class="about-tagline">NextGen Operations – Transforming Operations with AI.</p>
         </div>
     </section>
 
     <!-- Expertise Section -->
     <section class="expertise" id="expertise">
         <h2>Our Expertise</h2>
-        <p class="section-subtitle">13+ years driving operational excellence across support, managed services, and AI implementation</p>
+        <p class="section-subtitle">More than 2 decades of driving operational excellence across support, managed services, and AI implementation</p>
         <div class="expertise-grid">
             <div class="expertise-card">
                 <h3>Support Operations</h3>
@@ -825,7 +959,7 @@
         <p class="section-subtitle">Deep expertise meets proven methodologies</p>
         <div class="benefits-grid">
             <div class="benefit-item">
-                <h4>13+ Years Experience</h4>
+                <h4>2+ Decades of Experience</h4>
                 <p>Proven track record in support operations, customer success, managed services leadership, and AI transformation.</p>
             </div>
             <div class="benefit-item">
@@ -852,11 +986,11 @@
     </section>
 
     <!-- CTA Section -->
-    <section>
+    <section id="contact">
         <div class="cta-section">
             <h2>Ready to Transform Your Operations?</h2>
             <p>Start with a support health check assessment and discover your path to operational excellence</p>
-            <button class="btn-primary">Schedule Consultation Call</button>
+            <a href="mailto:nextgenoperations.ai@gmail.com" class="btn-primary">Schedule Consultation Call</a>
         </div>
     </section>
 
@@ -864,14 +998,19 @@
     <footer>
         <p><strong>NextGen Operations Consulting</strong></p>
         <p>Transforming support operations with AI and best practices</p>
+        <div class="footer-contact">
+            <p>Miraroad, Thane – 401107</p>
+            <p>Email: <a href="mailto:nextgenoperations.ai@gmail.com" style="color: var(--accent); text-decoration: none;">nextgenoperations.ai@gmail.com</a></p>
+        </div>
         <div class="footer-links">
+            <a href="#about">About</a>
             <a href="#expertise">Expertise</a>
             <a href="#services">Services</a>
             <a href="#clients">Ideal Clients</a>
-            <a href="mailto:contact@nextgenops.com">Email</a>
+            <a href="mailto:nextgenoperations.ai@gmail.com">Email</a>
             <a href="#">LinkedIn</a>
         </div>
-        <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-secondary);">© 2024 NextGen Operations Consulting. All rights reserved.</p>
+        <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-secondary);">© 2025 NextGen Operations Consulting. All rights reserved.</p>
     </footer>
 
     <script>
@@ -904,18 +1043,9 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .expertise-card, .client-tier, .benefit-item').forEach(el => {
+        document.querySelectorAll('.service-card, .expertise-card, .client-tier, .benefit-item, .mission-card, .vision-card').forEach(el => {
             el.style.opacity = '0';
             observer.observe(el);
-        });
-
-        // Button click handlers
-        document.querySelectorAll('.btn-primary, .cta-button, .btn-secondary').forEach(button => {
-            button.addEventListener('click', function() {
-                // Replace with your contact form or scheduling link
-                console.log('Button clicked - integrate with your CRM or scheduling tool');
-                alert('Contact form or scheduling integration would go here.\n\nReplace this with:\n- Calendly/Cal.com integration\n- Contact form submission\n- Email link');
-            });
         });
     </script>
 </body>
