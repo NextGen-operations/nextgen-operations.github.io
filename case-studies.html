@@ -6,88 +6,369 @@
     <title>Case Studies | NextGen Operations</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .coming-soon-wrapper {
+
+        /* ── Case Study Card Grid (top navigation) ── */
+        .cs-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.75rem;
+            margin-top: 2.5rem;
+        }
+
+        .cs-nav-card {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cs-nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #6366f1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cs-nav-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 36px rgba(0,212,255,0.1);
+        }
+
+        .cs-nav-card:hover::before { opacity: 1; }
+
+        .cs-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .cs-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.2);
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .cs-domain {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .cs-nav-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .cs-nav-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .cs-outcome-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.9rem;
+            background: rgba(63,185,80,0.1);
+            border: 1px solid rgba(63,185,80,0.25);
+            border-radius: 20px;
+            font-size: 0.82rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .cs-read-link {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* ── Divider ── */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 4rem 0;
+        }
+
+        /* ── Full Case Study Layout ── */
+        .case-study-full {
+            scroll-margin-top: 90px;
+        }
+
+        .cs-header {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(0,212,255,0.07) 0%, rgba(30,58,95,0.2) 100%);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 14px;
+            margin-bottom: 3rem;
+        }
+
+        .cs-header-top {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .cs-tag {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(0,212,255,0.12);
+            border: 1px solid rgba(0,212,255,0.25);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cs-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .cs-header-summary {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+
+        .cs-key-metric {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.75rem;
+            background: rgba(63,185,80,0.08);
+            border: 1px solid rgba(63,185,80,0.2);
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.05rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* ── CS Section Blocks ── */
+        .cs-body {
             display: flex;
             flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .cs-section {
+            padding: 2.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .cs-section-label {
+            display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 5rem 2rem;
-            max-width: 700px;
-            margin: 0 auto;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
         }
 
-        .cs-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.8;
+        .cs-section-icon {
+            font-size: 1.5rem;
         }
 
-        .coming-soon-wrapper h2 {
+        .cs-section-label h3 {
             font-family: 'Syne', sans-serif;
-            font-size: 2rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: var(--accent);
         }
 
-        .coming-soon-wrapper p {
+        .cs-section p {
             color: var(--text-secondary);
-            font-size: 1.05rem;
+            font-size: 0.97rem;
             line-height: 1.8;
             margin-bottom: 1rem;
         }
 
-        .notify-badge {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: rgba(0,212,255,0.1);
-            border: 1px solid rgba(0,212,255,0.3);
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .cs-section p:last-child { margin-bottom: 0; }
+
+        /* Bullet list */
+        .cs-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .cs-bullets li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+            line-height: 1.65;
+        }
+
+        .cs-bullets li::before {
+            content: '▸';
             color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 2.5rem;
-            letter-spacing: 0.3px;
+            font-size: 0.85rem;
+            margin-top: 3px;
+            flex-shrink: 0;
         }
 
-        /* Placeholder skeleton cards */
-        .placeholder-grid {
+        /* Numbered steps */
+        .cs-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .cs-step {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .step-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, #00a8cc 100%);
+            color: var(--primary);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.65;
+            margin-bottom: 0 !important;
+        }
+
+        /* Results */
+        .cs-outcomes {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 2rem 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
         }
 
-        .skeleton-card {
-            padding: 2rem;
-            background: var(--bg-card);
-            border: 1px dashed var(--border);
-            border-radius: 12px;
-            opacity: 0.5;
+        .outcome-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.9rem 1.1rem;
+            background: rgba(63,185,80,0.07);
+            border: 1px solid rgba(63,185,80,0.2);
+            border-radius: 8px;
         }
 
-        .skeleton-bar {
-            height: 12px;
-            background: var(--border);
-            border-radius: 6px;
+        .outcome-check {
+            color: var(--success);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .outcome-item span {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .cs-impact-box {
+            padding: 1.75rem;
+            background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(30,58,95,0.15) 100%);
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .cs-impact-box h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
             margin-bottom: 0.75rem;
         }
 
-        .skeleton-bar.short { width: 40%; }
-        .skeleton-bar.medium { width: 70%; }
-        .skeleton-bar.full { width: 100%; }
+        .cs-impact-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin-bottom: 0.75rem;
+        }
 
-        .skeleton-badge {
-            width: 80px;
-            height: 24px;
-            background: var(--border);
-            border-radius: 4px;
-            margin-bottom: 1rem;
+        .cs-bottom-outcome {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.65rem 1.4rem;
+            background: rgba(63,185,80,0.1);
+            border: 1px solid rgba(63,185,80,0.3);
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--success);
+        }
+
+        /* ── More coming soon ── */
+        .more-coming {
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px dashed var(--border);
+            border-radius: 14px;
+            margin-top: 3rem;
+            opacity: 0.6;
+        }
+
+        .more-coming p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .cs-header h2 { font-size: 1.5rem; }
+            .cs-outcomes { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -115,41 +396,201 @@
         <p>Real-world transformations and measurable outcomes across support and operations.</p>
     </div>
 
-    <!-- Coming Soon -->
-    <div class="coming-soon-wrapper">
-        <div class="cs-icon">📋</div>
-        <div class="notify-badge">Coming Soon</div>
-        <h2>Case Studies Are on the Way</h2>
-        <p>We are currently documenting our client engagements and the results achieved. Detailed case studies covering support operations transformations, AI implementations, and leadership coaching outcomes will be published here soon.</p>
-        <p>In the meantime, reach out to us directly to learn about our experience and past work.</p>
-        <a href="mailto:nextgenoperations.ai@gmail.com" class="btn-primary">Ask Us About Our Work</a>
-    </div>
+    <div class="section">
 
-    <!-- Skeleton placeholder cards (visual) -->
-    <div class="placeholder-grid">
-        <div class="skeleton-card">
-            <div class="skeleton-badge"></div>
-            <div class="skeleton-bar medium"></div>
-            <div class="skeleton-bar full"></div>
-            <div class="skeleton-bar full"></div>
-            <div class="skeleton-bar short"></div>
-        </div>
-        <div class="skeleton-card">
-            <div class="skeleton-badge"></div>
-            <div class="skeleton-bar medium"></div>
-            <div class="skeleton-bar full"></div>
-            <div class="skeleton-bar full"></div>
-            <div class="skeleton-bar short"></div>
-        </div>
-        <div class="skeleton-card">
-            <div class="skeleton-badge"></div>
-            <div class="skeleton-bar medium"></div>
-            <div class="skeleton-bar full"></div>
-            <div class="skeleton-bar full"></div>
-            <div class="skeleton-bar short"></div>
-        </div>
-    </div>
+        <!-- ── Card Navigation Grid ── -->
+        <!-- Add a new .cs-nav-card here each time you add a new case study below -->
+        <div class="cs-card-grid">
 
+            <a href="#cs-001" class="cs-nav-card">
+                <div class="cs-card-meta">
+                    <span class="cs-number">CASE STUDY 01</span>
+                    <span class="cs-domain">Workforce Management</span>
+                </div>
+                <h3>Transforming a Complex Support Schedule and Reducing Overtime Costs</h3>
+                <p>Redesigned a 24/7 support shift structure to eliminate fatigue, close coverage gaps, and dramatically cut overtime spend.</p>
+                <div class="cs-outcome-pill">✅ 90% reduction in overtime hours</div>
+                <div class="cs-read-link">Read case study →</div>
+            </a>
+
+            <!-- PLACEHOLDER — remove when adding Case Study 02 -->
+            <div class="cs-nav-card" style="opacity:0.35;cursor:default;pointer-events:none;">
+                <div class="cs-card-meta">
+                    <span class="cs-number">CASE STUDY 02</span>
+                    <span class="cs-domain">Coming Soon</span>
+                </div>
+                <h3>Next Case Study</h3>
+                <p>More client success stories will be published here soon.</p>
+            </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ══════════════════════════════════════
+             CASE STUDY 01
+             To add Case Study 02: copy this entire
+             block, change id to "cs-002", and update
+             the content below.
+        ══════════════════════════════════════ -->
+        <div class="case-study-full" id="cs-001">
+
+            <!-- Header -->
+            <div class="cs-header">
+                <div class="cs-header-top">
+                    <span class="cs-tag">Case Study 01</span>
+                    <span class="cs-tag" style="background:rgba(99,102,241,0.12);color:#a5b4fc;border-color:rgba(99,102,241,0.25);">Workforce Management</span>
+                    <span class="cs-tag" style="background:rgba(255,107,53,0.1);color:#ff9060;border-color:rgba(255,107,53,0.25);">24/7 Support Operations</span>
+                </div>
+                <h2>Transforming a Complex Support Schedule and Reducing Overtime Costs</h2>
+                <p class="cs-header-summary">
+                    A client running a 24/7 support operation was locked into an inefficient shift model that was burning out staff, creating coverage gaps, and driving overtime costs well beyond acceptable levels. We redesigned their entire workforce operating model — delivering immediate, measurable impact.
+                </p>
+                <div class="cs-key-metric">✅ Outcome: 90% reduction in overtime hours and substantial annual cost savings</div>
+            </div>
+
+            <!-- Body sections -->
+            <div class="cs-body">
+
+                <!-- Challenge -->
+                <div class="cs-section">
+                    <div class="cs-section-label">
+                        <span class="cs-section-icon">⚠️</span>
+                        <h3>The Challenge</h3>
+                    </div>
+                    <p>The client operated a 24/7 support environment and was facing significant workforce management challenges due to a complicated and inefficient shift structure. Several interconnected issues had built up over time:</p>
+                    <ul class="cs-bullets" style="margin-top:0.75rem;">
+                        <li>Excessive employee fatigue and reduced workforce flexibility</li>
+                        <li>Limited managerial oversight during certain shift periods</li>
+                        <li>No effective leave management controls or leave planning process</li>
+                        <li>Frequent schedule gaps caused by unplanned absences</li>
+                        <li>High dependency on overtime to maintain service coverage</li>
+                        <li>Rising operational costs due to excessive overtime spending</li>
+                    </ul>
+                    <p style="margin-top:1rem;">As a result, overtime hours continued to climb while maintaining adequate support coverage became increasingly difficult — creating a cycle that was unsustainable for both the business and the team.</p>
+                </div>
+
+                <!-- Our Approach -->
+                <div class="cs-section">
+                    <div class="cs-section-label">
+                        <span class="cs-section-icon">🔍</span>
+                        <h3>Our Approach</h3>
+                    </div>
+                    <p>We began with a structured assessment phase before proposing any changes:</p>
+                    <div class="cs-steps" style="margin-top:1rem;">
+                        <div class="cs-step">
+                            <div class="step-badge">1</div>
+                            <div class="step-content">
+                                <h4>Stakeholder Conversations</h4>
+                                <p>Conducted discussions with team members, supervisors, and leadership to understand operational pain points and workforce challenges from all levels.</p>
+                            </div>
+                        </div>
+                        <div class="cs-step">
+                            <div class="step-badge">2</div>
+                            <div class="step-content">
+                                <h4>Scope Assessment</h4>
+                                <p>Reviewed support requirements, service coverage expectations, staffing levels, leave patterns, and workload distribution across the operation.</p>
+                            </div>
+                        </div>
+                        <div class="cs-step">
+                            <div class="step-badge">3</div>
+                            <div class="step-content">
+                                <h4>Leadership Engagement</h4>
+                                <p>Worked closely with senior management to align workforce planning recommendations with business objectives and service delivery expectations.</p>
+                            </div>
+                        </div>
+                        <div class="cs-step">
+                            <div class="step-badge">4</div>
+                            <div class="step-content">
+                                <h4>Workforce Planning Analysis</h4>
+                                <p>Evaluated existing schedules, leave utilization trends, shift coverage risks, and overtime patterns to identify root causes and opportunities for improvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution -->
+                <div class="cs-section">
+                    <div class="cs-section-label">
+                        <span class="cs-section-icon">🛠️</span>
+                        <h3>Solution Implemented</h3>
+                    </div>
+                    <p>Based on our analysis, we redesigned the support operating model with a set of targeted changes:</p>
+                    <ul class="cs-bullets" style="margin-top:0.75rem;">
+                        <li>Transitioned from the complicated shift structure to a standard, simplified 24/7 rotational support schedule</li>
+                        <li>Strategically distributed team leads and senior resources across shifts to provide continuous oversight and decision-making support</li>
+                        <li>Increased collaboration within shifts by assigning multiple team members together, improving workload sharing and knowledge transfer</li>
+                        <li>Introduced improved leave planning and scheduling practices to proactively reduce coverage gaps</li>
+                        <li>Created a more predictable staffing model that minimized the need for emergency overtime coverage</li>
+                    </ul>
+                </div>
+
+                <!-- Results -->
+                <div class="cs-section">
+                    <div class="cs-section-label">
+                        <span class="cs-section-icon">📊</span>
+                        <h3>Results</h3>
+                    </div>
+
+                    <p style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:600;color:var(--text-primary);margin-bottom:1rem;">Key Outcomes</p>
+                    <div class="cs-outcomes">
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>90% reduction in overtime hours</span>
+                        </div>
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>Significant annual cost savings through reduced overtime expenditure</span>
+                        </div>
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>Improved work-life balance for all support team members</span>
+                        </div>
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>Better shift coverage and operational continuity</span>
+                        </div>
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>Increased managerial visibility and oversight across all shifts</span>
+                        </div>
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>Enhanced employee satisfaction and schedule flexibility</span>
+                        </div>
+                        <div class="outcome-item">
+                            <span class="outcome-check">✅</span>
+                            <span>More sustainable and predictable workforce planning model</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-impact-box">
+                        <h4>Business Impact</h4>
+                        <p>The redesigned support schedule created a healthier and more efficient operating environment. Employees benefited from improved work-life balance, while leadership gained better control over workforce planning and operational costs.</p>
+                        <p>The result was a more resilient 24/7 support operation with substantially lower overtime expenses, improved team performance, and a workforce model built to scale.</p>
+                        <div class="cs-bottom-outcome">90% reduction in overtime · Substantial annual cost savings · Improved employee experience</div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end .cs-body -->
+
+        </div>
+        <!-- end #cs-001 -->
+
+        <!-- More case studies coming -->
+        <div class="more-coming">
+            <p>✦ &nbsp; More case studies will be added here &nbsp; ✦</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-banner">
+            <h2>Want Results Like These?</h2>
+            <p>Let's explore how we can bring the same level of transformation to your operations.</p>
+            <a href="mailto:nextgenoperations.ai@gmail.com" class="btn-primary">Schedule a Consultation</a>
+        </div>
+
+    </div>
 </div>
 
 <!-- Footer -->
@@ -172,6 +613,20 @@
         <p class="footer-copy">© 2025 NextGen Operations Consulting. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    // Smooth scroll for internal anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const el = document.querySelector(href);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
